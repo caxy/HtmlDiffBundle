@@ -1,0 +1,24 @@
+{
+    "name": "caxy/htmldiff-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony2 Bundle for php-htmldiff (caxy/php-htmldiff)",
+    "license": "MIT",
+    "keywords": [ "diff", "html", "diffing" ],
+    "homepage": "https://github.com/caxy/HtmlDiffBundle",
+    "authors": [
+        {
+            "name": "Josh Schroeder",
+            "email": "jschroeder@caxy.com",
+            "homepage": "http://www.caxy.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle": "~2.1",
+        "caxy/php-htmldiff": "*"
+    },
+    "target-dir": "Caxy/HtmlDiffBundle",
+    "autoload": {
+        "psr-0": { "Caxy\\HtmlDiffBundle": "" }
+    }
+}

@@ -1,0 +1,7 @@
+parameters:
+    caxy.html_diff.class: Caxy\HtmlDiffBundle\Service\HtmlDiffService
+
+services:
+    caxy.html_diff:
+        class: %caxy.html_diff.class%
+        arguments:  [@service_container]
