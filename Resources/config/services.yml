@@ -1,7 +1,13 @@
 parameters:
     caxy.html_diff.class: Caxy\HtmlDiffBundle\Service\HtmlDiffService
+    caxy.twig.html_diff_extension.class: Caxy\HtmlDiffBundle\Twig\HtmlDiffExtension
 
 services:
     caxy.html_diff:
         class: %caxy.html_diff.class%
-        arguments:  [@service_container]
+        arguments: [@service_container]
+    caxy.twig.html_diff_extension:
+        class: %caxy.twig.html_diff_extension.class%
+        arguments: [@service_container]
+        tags:
+            - { name: twig.extension }
