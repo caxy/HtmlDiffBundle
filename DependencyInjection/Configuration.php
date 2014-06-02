@@ -26,6 +26,10 @@ class Configuration implements ConfigurationInterface
                     ->prototype('scalar')->end()
                 ->end()
                 ->scalarNode('encoding')->end()
+                ->arrayNode('special_case_chars')
+                    ->prototype('scalar')->end()
+                ->end()
+                ->booleanNode('group_diffs')->end()
             ->end();
 
         return $treeBuilder;
