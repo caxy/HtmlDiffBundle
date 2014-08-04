@@ -15,7 +15,7 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/framework-bundle": "~2.1",
-        "caxy/php-htmldiff": "*"
+        "caxy/php-htmldiff": ">=0.0.1"
     },
     "target-dir": "Caxy/HtmlDiffBundle",
     "autoload": {
