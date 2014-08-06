@@ -14,17 +14,21 @@ class HtmlDiffService
     
     protected $container;
 
-    protected $specialCaseTags = HtmlDiff::defaultSpecialCaseTags;
+    protected $specialCaseTags;
     
-    protected $specialCaseChars = HtmlDiff::defaultSpecialCaseChars;
+    protected $specialCaseChars;
     
-    protected $groupDiffs = HtmlDiff::defaultGroupDiffs;
+    protected $groupDiffs;
 
     protected $encoding = 'UTF-8';
 
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
+
+        $this->specialCaseTags  = HtmlDiff::$defaultSpecialCaseTags;
+        $this->specialCaseChars = HtmlDiff::$defaultSpecialCaseChars;
+        $this->groupDiffs       = HtmlDiff::$defaultGroupDiffs;
         
         $this->loadParameter(self::PARAMETER_ENCODING, $this->encoding);
         $this->loadParameter(self::PARAMETER_SPECIAL_CASE_TAGS, $this->specialCaseTags);
