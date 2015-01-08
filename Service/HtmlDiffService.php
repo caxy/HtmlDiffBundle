@@ -11,6 +11,7 @@ class HtmlDiffService
     const PARAMETER_SPECIAL_CASE_CHARS = 'special_case_chars';
     const PARAMETER_ENCODING = 'encoding';
     const PARAMETER_GROUP_DIFFS = 'group_diffs';
+    const PARAMETER_INSERT_SPACE_IN_REPLACE = 'insert_space_in_replace';
     
     protected $container;
 
@@ -19,6 +20,8 @@ class HtmlDiffService
     protected $specialCaseChars;
     
     protected $groupDiffs;
+
+    protected $insertSpaceInReplace;
 
     protected $encoding = 'UTF-8';
 
@@ -34,6 +37,7 @@ class HtmlDiffService
         $this->loadParameter(self::PARAMETER_SPECIAL_CASE_TAGS, $this->specialCaseTags);
         $this->loadParameter(self::PARAMETER_SPECIAL_CASE_CHARS, $this->specialCaseChars);
         $this->loadParameter(self::PARAMETER_GROUP_DIFFS, $this->groupDiffs);
+        $this->loadParameter(self::PARAMETER_INSERT_SPACE_IN_REPLACE, $this->insertSpaceInReplace);
     }
     
     public function loadParameter($param, &$property)
@@ -58,6 +62,10 @@ class HtmlDiffService
         
         if ($specialCaseChars !== null) {
             $diff->setSpecialCaseChars($specialCaseChars);
+        }
+
+        if ($this->insertSpaceInReplace !== null) {
+            $diff->setInsertSpaceInReplace($this->insertSpaceInReplace);
         }
 
         return $diff->build();

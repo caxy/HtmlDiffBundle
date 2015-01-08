@@ -30,6 +30,9 @@ class Configuration implements ConfigurationInterface
                     ->prototype('scalar')->end()
                 ->end()
                 ->booleanNode('group_diffs')->end()
+                ->booleanNode('insert_space_in_replace')
+                    ->defaultFalse()
+                ->end()
             ->end();
 
         return $treeBuilder;
