@@ -2,144 +2,188 @@
 
 namespace Caxy\HtmlDiffBundle\Service;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Caxy\HtmlDiff\HtmlDiffConfig;
 use Caxy\HtmlDiff\HtmlDiff;
 
+/**
+ * Class HtmlDiffService
+ * @package Caxy\HtmlDiffBundle\Service
+ */
 class HtmlDiffService
 {
-    const PARAMETER_SPECIAL_CASE_TAGS = 'special_case_tags';
-    const PARAMETER_SPECIAL_CASE_CHARS = 'special_case_chars';
-    const PARAMETER_ENCODING = 'encoding';
-    const PARAMETER_GROUP_DIFFS = 'group_diffs';
-    const PARAMETER_INSERT_SPACE_IN_REPLACE = 'insert_space_in_replace';
-    
-    protected $container;
+    /**
+     * @var HtmlDiffConfig
+     */
+    protected $config;
 
-    protected $specialCaseTags;
-    
-    protected $specialCaseChars;
-    
-    protected $groupDiffs;
-
-    protected $insertSpaceInReplace;
-
-    protected $encoding = 'UTF-8';
-
-    public function __construct(ContainerInterface $container)
+    /**
+     * @return HtmlDiffConfig
+     */
+    public function getConfig()
     {
-        $this->container = $container;
-
-        $this->specialCaseTags  = HtmlDiff::$defaultSpecialCaseTags;
-        $this->specialCaseChars = HtmlDiff::$defaultSpecialCaseChars;
-        $this->groupDiffs       = HtmlDiff::$defaultGroupDiffs;
-        
-        $this->loadParameter(self::PARAMETER_ENCODING, $this->encoding);
-        $this->loadParameter(self::PARAMETER_SPECIAL_CASE_TAGS, $this->specialCaseTags);
-        $this->loadParameter(self::PARAMETER_SPECIAL_CASE_CHARS, $this->specialCaseChars);
-        $this->loadParameter(self::PARAMETER_GROUP_DIFFS, $this->groupDiffs);
-        $this->loadParameter(self::PARAMETER_INSERT_SPACE_IN_REPLACE, $this->insertSpaceInReplace);
-    }
-    
-    public function loadParameter($param, &$property)
-    {
-        $param = 'caxy_html_diff.' . $param;
-        if ($this->container->hasParameter($param)) {
-            $property = $this->container->getParameter($param);
-        }
+        return $this->config;
     }
 
+    /**
+     * @param HtmlDiffConfig $config
+     *
+     * @return HtmlDiffService
+     */
+    public function setConfig(HtmlDiffConfig $config)
+    {
+        $this->config = $config;
+
+        return $this;
+    }
+
+    /**
+     * @param string     $oldText
+     * @param string     $newText
+     * @param null|bool  $groupDiffs
+     * @param null|array $specialCaseChars
+     *
+     * @return string
+     */
     public function diff($oldText, $newText, $groupDiffs = null, $specialCaseChars = null)
     {
-        if ($groupDiffs === null) {
-            $groupDiffs = $this->groupDiffs;
+        // Copy the config object, so that these changes are not persisted.
+        $config = clone $this->config;
+        if ($groupDiffs !== null) {
+            $config->setGroupDiffs($groupDiffs);
         }
-        
-        if ($specialCaseChars === null) {
-            $specialCaseChars = $this->specialCaseChars;
-        }
-        
-        $diff = new HtmlDiff($oldText, $newText, $this->encoding, $this->specialCaseTags, $groupDiffs);
         
         if ($specialCaseChars !== null) {
-            $diff->setSpecialCaseChars($specialCaseChars);
+            $config->setSpecialCaseChars($specialCaseChars);
         }
 
-        if ($this->insertSpaceInReplace !== null) {
-            $diff->setInsertSpaceInReplace($this->insertSpaceInReplace);
-        }
+        $diff = HtmlDiff::create($oldText, $newText, $config);
 
         return $diff->build();
     }
-    
+
+    /**
+     * @return bool
+     *
+     * @deprecated since 0.1.0
+     */
     public function getGroupDiffs()
     {
-        return $this->groupDiffs;
+        return $this->config->isGroupDiffs();
     }
-    
+
+    /**
+     * @param $boolean
+     *
+     * @return $this
+     *
+     * @deprecated since 0.1.0
+     */
     public function setGroupDiffs($boolean)
     {
-        $this->groupDiffs = $boolean;
+        $this->config->setGroupDiffs($boolean);
         
         return $this;
     }
 
+    /**
+     * @return string
+     *
+     * @deprecated since 0.1.0
+     */
     public function getEncoding()
     {
-        return $this->encoding;
+        return $this->config->getEncoding();
     }
 
+    /**
+     * @param $encoding
+     *
+     * @return $this
+     *
+     * @deprecated since 0.1.0
+     */
     public function setEncoding($encoding)
     {
-        $this->encoding = $encoding;
+        $this->config->setEncoding($encoding);
 
         return $this;
     }
 
+    /**
+     * @return array|null
+     *
+     * @deprecated since 0.1.0
+     */
     public function getSpecialCaseTags()
     {
-        return $this->specialCaseTags;
+        return $this->config->getSpecialCaseChars();
     }
 
+    /**
+     * @param $tag
+     *
+     * @return $this
+     *
+     * @deprecated since 0.1.0
+     */
     public function addSpecialCaseTag($tag)
     {
-        if (!in_array($tag, $this->specialCaseTags)) {
-            $this->specialCaseTags[] = $tag;
-        }
+        $this->config->addSpecialCaseTag($tag);
 
         return $this;
     }
 
+    /**
+     * @param $tag
+     *
+     * @return $this
+     *
+     * @deprecated since 0.1.0
+     */
     public function removeSpecialCaseTag($tag)
     {
-        if (($key = array_search($tag, $this->specialCaseTags)) !== false) {
-            unset($this->specialCaseTags[$key]);
-        }
+        $this->config->removeSpecialCaseTag($tag);
 
         return $this;
     }
-    
+
+    /**
+     * @param array $chars
+     *
+     * @deprecated since 0.1.0
+     */
     public function setSpecialCaseChars(array $chars)
     {
-        $this->specialCaseChars = $chars;
+        $this->config->setSpecialCaseChars($chars);
     }
-    
+
+    /**
+     * @return array|null
+     *
+     * @deprecated since 0.1.0
+     */
     public function getSpecialCaseChars()
     {
-        return $this->specialCaseChars;
+        return $this->config->getSpecialCaseChars();
     }
-    
+
+    /**
+     * @param $char
+     *
+     * @deprecated since 0.1.0
+     */
     public function addSpecialCaseChar($char)
     {
-        if (!in_array($char, $this->specialCaseChars)) {
-            $this->specialCaseChars[] = $char;
-        }
+        $this->config->addSpecialCaseChar($char);
     }
-    
+
+    /**
+     * @param $char
+     *
+     * @deprecated since 0.1.0
+     */
     public function removeSpecialCaseChar($char)
     {
-        $key = array_search($char, $this->specialCaseChars);
-        if ($key !== false) {
-            unset($this->specialCaseChars[$key]);
-        }
+        $this->config->removeSpecialCaseChar($char);
     }
 }
