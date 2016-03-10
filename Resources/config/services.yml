@@ -1,11 +1,16 @@
 parameters:
     caxy.html_diff.class: Caxy\HtmlDiffBundle\Service\HtmlDiffService
+    caxy.html_diff.config.class: Caxy\HtmlDiff\HtmlDiffConfig
     caxy.twig.html_diff_extension.class: Caxy\HtmlDiffBundle\Twig\HtmlDiffExtension
 
 services:
+    caxy.html_diff.config:
+        class: %caxy.html_diff.config.class%
+        factory: [%caxy.html_diff.config.class%, create]
     caxy.html_diff:
         class: %caxy.html_diff.class%
-        arguments: [@service_container]
+        calls:
+            - [setConfig, [@caxy.html_diff.config]]
     caxy.twig.html_diff_extension:
         class: %caxy.twig.html_diff_extension.class%
         arguments: [@service_container]

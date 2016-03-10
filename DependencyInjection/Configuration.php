@@ -2,6 +2,7 @@
 
 namespace Caxy\HtmlDiffBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -33,8 +34,43 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('insert_space_in_replace')
                     ->defaultFalse()
                 ->end()
+                ->booleanNode('use_table_diffing')
+                    ->defaultTrue()
+                ->end()
+                ->integerNode('match_threshold')->end()
+                ->append($this->getDoctrineCacheDriverNode('doctrine_cache_driver'))
             ->end();
 
         return $treeBuilder;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return ArrayNodeDefinition
+     */
+    private function getDoctrineCacheDriverNode($name)
+    {
+        $treeBuilder = new TreeBuilder();
+        $node = $treeBuilder->root($name);
+        $node
+            ->canBeEnabled()
+            ->beforeNormalization()
+                ->ifString()
+                ->then(function ($v) { return array('type' => $v); })
+            ->end()
+            ->children()
+                ->scalarNode('type')->defaultValue('array')->end()
+                ->scalarNode('host')->end()
+                ->scalarNode('port')->end()
+                ->scalarNode('instance_class')->end()
+                ->scalarNode('class')->end()
+                ->scalarNode('id')->end()
+                ->scalarNode('namespace')->defaultNull()->end()
+                ->scalarNode('cache_provider')->defaultNull()->end()
+            ->end()
+        ;
+
+        return $node;
     }
 }

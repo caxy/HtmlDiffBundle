@@ -15,10 +15,22 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/framework-bundle": "~2.1",
-        "caxy/php-htmldiff": ">=0.0.3"
+        "caxy/php-htmldiff": "~0.1"
+    },
+    "require-dev": {
+        "doctrine/doctrine-cache-bundle": "~1.0"
+    },
+    "suggest": {
+        "doctrine/doctrine-cache-bundle": "Used for caching the calculated diffs in caxy/php-htmldiff"
     },
     "target-dir": "Caxy/HtmlDiffBundle",
     "autoload": {
         "psr-0": { "Caxy\\HtmlDiffBundle": "" }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
     }
 }
