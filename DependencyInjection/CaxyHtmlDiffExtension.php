@@ -43,9 +43,12 @@ class CaxyHtmlDiffExtension extends Extension
 
         $cacheDriverId = null;
 
-
         if (!empty($config['doctrine_cache_driver']) && $config['doctrine_cache_driver']['enabled']) {
             $cacheDriverId = $this->loadCacheDriver('doctrine_cache_driver', $config['doctrine_cache_driver'], $container);
+        }
+
+        if (!isset($config['purifier_cache_location']) {
+            $config['purifier_cache_location'] = $container->getParameter('kernel.cache_dir');
         }
 
         foreach ($config as $key => $value) {
