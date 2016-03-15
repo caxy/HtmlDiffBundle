@@ -78,6 +78,7 @@ class CaxyHtmlDiffExtension extends Extension
             'insert_space_in_replace' => 'setInsertSpaceInReplace',
             'match_threshold'         => 'setMatchThreshold',
             'use_table_diffing'       => 'setUseTableDiffing',
+            'purifier_cache_location' => 'setPurifierCacheLocation',
         );
 
         foreach ($methodsToCall as $key => $methodName) {
