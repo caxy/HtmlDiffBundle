@@ -37,7 +37,7 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('use_table_diffing')
                     ->defaultTrue()
                 ->end()
-                ->scalerNode('purifier_cache_location')
+                ->scalarNode('purifier_cache_location')
                     ->defaultNull()
                 ->end()
                 ->integerNode('match_threshold')->end()
