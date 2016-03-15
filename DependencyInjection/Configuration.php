@@ -5,6 +5,7 @@ namespace Caxy\HtmlDiffBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * This is the class that validates and merges configuration from your app/config files
@@ -13,6 +14,13 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
+    protected $kernel;
+
+    public function __construct(KernelInterface $kernel)
+    {
+        $this->kernel = $kernel;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -36,6 +44,9 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->booleanNode('use_table_diffing')
                     ->defaultTrue()
+                ->end()
+                ->scalerNode('purifier_cache_location')
+                    ->defaultValue($this->kernel->getCacheDir())
                 ->end()
                 ->integerNode('match_threshold')->end()
                 ->append($this->getDoctrineCacheDriverNode('doctrine_cache_driver'))

@@ -6,6 +6,7 @@ parameters:
 services:
     caxy.html_diff.config:
         class: %caxy.html_diff.config.class%
+        arguments: [@kernel]
         factory: [%caxy.html_diff.config.class%, create]
     caxy.html_diff:
         class: %caxy.html_diff.class%
