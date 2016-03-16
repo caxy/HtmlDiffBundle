@@ -37,6 +37,9 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('use_table_diffing')
                     ->defaultTrue()
                 ->end()
+                ->scalarNode('purifier_cache_location')
+                    ->defaultNull()
+                ->end()
                 ->integerNode('match_threshold')->end()
                 ->append($this->getDoctrineCacheDriverNode('doctrine_cache_driver'))
             ->end();

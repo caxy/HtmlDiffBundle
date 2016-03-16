@@ -43,9 +43,12 @@ class CaxyHtmlDiffExtension extends Extension
 
         $cacheDriverId = null;
 
-
         if (!empty($config['doctrine_cache_driver']) && $config['doctrine_cache_driver']['enabled']) {
             $cacheDriverId = $this->loadCacheDriver('doctrine_cache_driver', $config['doctrine_cache_driver'], $container);
+        }
+
+        if (!isset($config['purifier_cache_location']) {
+            $config['purifier_cache_location'] = $container->getParameter('kernel.cache_dir');
         }
 
         foreach ($config as $key => $value) {
@@ -75,6 +78,7 @@ class CaxyHtmlDiffExtension extends Extension
             'insert_space_in_replace' => 'setInsertSpaceInReplace',
             'match_threshold'         => 'setMatchThreshold',
             'use_table_diffing'       => 'setUseTableDiffing',
+            'purifier_cache_location' => 'setPurifierCacheLocation',
         );
 
         foreach ($methodsToCall as $key => $methodName) {
