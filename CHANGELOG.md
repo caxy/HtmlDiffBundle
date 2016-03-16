@@ -1,5 +1,12 @@
 # Change Log
 
+## [v0.1.1](https://github.com/caxy/HtmlDiffBundle/tree/v0.1.1) (2016-03-16)
+[Full Changelog](https://github.com/caxy/HtmlDiffBundle/compare/v0.1.0...v0.1.1)
+
+**Features and Enhancements:**
+
+- Updated Service Configuration [\#8](https://github.com/caxy/HtmlDiffBundle/pull/8) ([dbergunder](https://github.com/dbergunder))
+
 ## [v0.1.0](https://github.com/caxy/HtmlDiffBundle/tree/v0.1.0) (2016-03-10)
 
 [Full Changelog](https://github.com/caxy/HtmlDiffBundle/compare/0.0.1...v0.1.0)
