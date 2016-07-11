@@ -13,8 +13,8 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
-        "symfony/framework-bundle": "~2.1",
+        "php": ">=5.3.9",
+        "symfony/framework-bundle": "~2.3|~3.0",
         "caxy/php-htmldiff": "~0.1"
     },
     "require-dev": {
