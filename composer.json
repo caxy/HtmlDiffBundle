@@ -23,9 +23,8 @@
     "suggest": {
         "doctrine/doctrine-cache-bundle": "Used for caching the calculated diffs in caxy/php-htmldiff"
     },
-    "target-dir": "Caxy/HtmlDiffBundle",
     "autoload": {
-        "psr-0": { "Caxy\\HtmlDiffBundle": "" }
+        "psr-4": { "Caxy\\HtmlDiffBundle\\": "src/" }
     },
     "minimum-stability": "dev",
     "extra": {
