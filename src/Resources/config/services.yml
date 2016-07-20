@@ -10,9 +10,9 @@ services:
     caxy.html_diff:
         class: %caxy.html_diff.class%
         calls:
-            - [setConfig, [@caxy.html_diff.config]]
+            - [setConfig, ["@caxy.html_diff.config"]]
     caxy.twig.html_diff_extension:
         class: %caxy.twig.html_diff_extension.class%
-        arguments: [@service_container]
+        arguments: ["@service_container"]
         tags:
             - { name: twig.extension }
