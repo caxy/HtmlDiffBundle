@@ -1,10 +1,10 @@
 {
-    "name": "bricelalu/htmldiff-bundle",
+    "name": "caxy/htmldiff-bundle",
     "type": "symfony-bundle",
-    "description": "Symfony3 Bundle for php-htmldiff (bricelalu/php-htmldiff)",
+    "description": "Symfony Bundle for php-htmldiff (caxy/php-htmldiff)",
     "license": "MIT",
     "keywords": [ "diff", "html", "diffing" ],
-    "homepage": "https://github.com/bricelalu/HtmlDiffBundle",
+    "homepage": "https://github.com/caxy/HtmlDiffBundle",
     "authors": [
         {
             "name": "Josh Schroeder",
