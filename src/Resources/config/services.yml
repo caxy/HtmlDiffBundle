@@ -7,12 +7,15 @@ services:
     caxy.html_diff.config:
         class: "%caxy.html_diff.config.class%"
         factory: ["%caxy.html_diff.config.class%", create]
+        public: true
     caxy.html_diff:
         class: "%caxy.html_diff.class%"
+        public: true
         calls:
             - [setConfig, ["@caxy.html_diff.config"]]
     caxy.twig.html_diff_extension:
         class: "%caxy.twig.html_diff_extension.class%"
-        arguments: ["@service_container"]
+        arguments: ["@caxy.html_diff"]
+        public: true
         tags:
             - { name: twig.extension }
