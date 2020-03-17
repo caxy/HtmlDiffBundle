@@ -5,6 +5,7 @@ namespace Caxy\HtmlDiffBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * This is the class that validates and merges configuration from your app/config files
@@ -18,9 +19,14 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('caxy_html_diff');
-
+        if (Kernel::VERSION_ID >= 40400) {
+            $treeBuilder = new TreeBuilder('caxy_html_diff');
+            $rootNode    = $treeBuilder->getRootNode();
+        } else {
+            $treeBuilder = new TreeBuilder();
+            $rootNode    = $treeBuilder->root('caxy_html_diff');
+        }
+        
         $rootNode
             ->children()
                 ->arrayNode('special_case_tags')
@@ -54,8 +60,14 @@ class Configuration implements ConfigurationInterface
      */
     private function getDoctrineCacheDriverNode($name)
     {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root($name);
+        if (Kernel::VERSION_ID >= 40400) {
+            $treeBuilder = new TreeBuilder($name);
+            $node = $treeBuilder->getRootNode();
+        } else {
+            $treeBuilder = new TreeBuilder();
+            $node = $treeBuilder->root($name);
+        }
+
         $node
             ->canBeEnabled()
             ->beforeNormalization()
