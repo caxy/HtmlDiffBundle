@@ -18,9 +18,14 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('caxy_html_diff');
-
+        if (Kernel::VERSION_ID >= 40200) {
+            $treeBuilder = new TreeBuilder('caxy_html_diff');
+            $rootNode    = $treeBuilder->getRootNode();
+        } else {
+            $treeBuilder = new TreeBuilder();
+            $rootNode    = $treeBuilder->root('caxy_html_diff');
+        }
+        
         $rootNode
             ->children()
                 ->arrayNode('special_case_tags')
@@ -54,8 +59,14 @@ class Configuration implements ConfigurationInterface
      */
     private function getDoctrineCacheDriverNode($name)
     {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root($name);
+        if (Kernel::VERSION_ID >= 40200) {
+            $treeBuilder = new TreeBuilder($name);
+            $rootNode    = $treeBuilder->getRootNode();
+        } else {
+            $treeBuilder = new TreeBuilder();
+            $rootNode    = $treeBuilder->root($name);
+        }
+
         $node
             ->canBeEnabled()
             ->beforeNormalization()
