@@ -1,5 +1,5 @@
 {
-    "name": "caxy/htmldiff-bundle",
+    "name": "rinne13/htmldiff-bundle",
     "type": "symfony-bundle",
     "description": "Symfony Bundle for php-htmldiff (caxy/php-htmldiff)",
     "license": "MIT",
@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": ">=5.3.9",
-        "symfony/framework-bundle": "~2.3||3.*||4.*",
+        "symfony/framework-bundle": "~2.3||3.*||4.*||5.*",
         "caxy/php-htmldiff": "~0.1"
     },
     "require-dev": {
