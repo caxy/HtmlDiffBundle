@@ -1,5 +1,5 @@
 {
-    "name": "rinne13/htmldiff-bundle",
+    "name": "caxy/htmldiff-bundle",
     "type": "symfony-bundle",
     "description": "Symfony Bundle for php-htmldiff (caxy/php-htmldiff)",
     "license": "MIT",
