@@ -18,8 +18,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('caxy_html_diff');
+        $treeBuilder = new TreeBuilder('caxy_html_diff');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
@@ -54,8 +54,8 @@ class Configuration implements ConfigurationInterface
      */
     private function getDoctrineCacheDriverNode($name)
     {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root($name);
+        $treeBuilder = new TreeBuilder($name);
+        $node = $treeBuilder->getRootNode();
         $node
             ->canBeEnabled()
             ->beforeNormalization()
