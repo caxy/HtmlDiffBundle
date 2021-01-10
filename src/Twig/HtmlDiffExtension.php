@@ -4,7 +4,7 @@ namespace Caxy\HtmlDiffBundle\Twig;
 
 use Caxy\HtmlDiffBundle\Service\HtmlDiffService;
 
-class HtmlDiffExtension extends \Twig_Extension
+class HtmlDiffExtension extends \Twig\Extension\AbstractExtension
 {
     protected $container;
 
@@ -18,7 +18,7 @@ class HtmlDiffExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('htmldiff', array($this, 'htmlDiff'), array('is_safe' => array('html'))),
+            new \Twig\TwigFunction('htmldiff', array($this, 'htmlDiff'), array('is_safe' => array('html'))),
         );
     }
 
