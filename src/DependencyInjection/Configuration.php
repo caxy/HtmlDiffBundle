@@ -16,10 +16,10 @@ class Configuration implements ConfigurationInterface
     /**
      * {@inheritDoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('caxy_html_diff');
+        $treeBuilder = new TreeBuilder('caxy_html_diff');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
@@ -52,10 +52,10 @@ class Configuration implements ConfigurationInterface
      *
      * @return ArrayNodeDefinition
      */
-    private function getDoctrineCacheDriverNode($name)
+    private function getDoctrineCacheDriverNode($name): ArrayNodeDefinition
     {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root($name);
+        $treeBuilder = new TreeBuilder($name);
+        $node = $treeBuilder->getRootNode();
         $node
             ->canBeEnabled()
             ->beforeNormalization()
