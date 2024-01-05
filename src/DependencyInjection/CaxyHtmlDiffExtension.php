@@ -36,7 +36,7 @@ class CaxyHtmlDiffExtension extends Extension
     /**
      * {@inheritDoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
@@ -63,7 +63,7 @@ class CaxyHtmlDiffExtension extends Extension
      * @param ContainerBuilder $container
      * @param string           $cacheDriverId
      */
-    protected function loadHtmlDiffConfig(array $config, ContainerBuilder $container, $cacheDriverId = null)
+    protected function loadHtmlDiffConfig(array $config, ContainerBuilder $container, $cacheDriverId = null): void
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
@@ -100,7 +100,7 @@ class CaxyHtmlDiffExtension extends Extension
      * @return string
      * @throws \Exception
      */
-    protected function loadCacheDriver($cacheName, array $driverMap, ContainerBuilder $container)
+    protected function loadCacheDriver($cacheName, array $driverMap, ContainerBuilder $container): string
     {
         if (null === $this->cacheProviderLoader) {
             throw new \Exception('DoctrineCacheBundle required to use doctrine_cache_driver.');

@@ -9,7 +9,7 @@ Symfony Bundle for [caxy/php-htmldiff][0].
 
 ## Requirements
 
-- PHP 5.3.3 or higher
+- PHP 7.1 or higher
 - [caxy/php-htmldiff][0]
 
 ## Installation
